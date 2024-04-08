@@ -37,21 +37,20 @@ How funny would it be if we just ended the blog here?
 We’ll tell you!  Beefy is taking a fresh look at the ALM process, coding from the ground up a novel solution to all of the above problems.  Instead of trying to decentralize the rebalancing process, how about we just skip rebalancing altogether?  At the same time you want all capital to be working and available for trades, since CL is all about capital efficiency afterall.
 
 To achieve this, CLM products will
-Put as many tokens as possible into a 50/50 position with the predetermined width for the strategy centered on the current price. We’ll call this the main position.
-With whichever token there is more of, create another position as a 1-sided limit order just 1 tick outside of the current tick. We’ll call this the alt position.
+    * Put as many tokens as possible into a 50/50 position with the predetermined width for the strategy centered on the current price. We’ll call this the main position.
+    * With whichever token there is more of, create another position as a 1-sided limit order just 1 tick outside of the current tick. We’ll call this the alt position.
 
 ![](/src/images/blog/clm/range-graphic.png)
 
 By having this alt position, all capital is able to be deployed. And as much as we want our bags to go up-only, price doesn’t actually move in a straight line so this 2nd, limit-order position will frequently be utilized too.
 
-You’re probably wondering how we keep the main position in range. Since we already ruled-out selling 1 token as an option, we need another solution.  Our solution is a Gelato task which will call a rebalance function, in a single txn we will
+You’re probably wondering how we keep the main position in range. Since we already ruled-out selling 1 token as an option, we need another solution.  Our solution is a Gelato task which will call a moveTicks function, in a single txn we will
 1. Withdraw all liquidity from both positions
 2. Complete accurate accounting of both tokens so that we can provide each user their fair share of the overall pool
-    * During deposits, new tokens are added to the overall group of tokens and depositor is issued their share tokens
     * During a process called harvest, all trading fees, less Beefy’s performance fee, are added to overall group of tokens
 3. Liquidity is added back in the previously described manner into the two positions with the primary position centered on the new price.
 
-Beefy will ensure harvests are called if it has been too long, and there will also likely be frequent deposits into this awesome product, so the position is going to be closely following along with the price at all times.
+Beefy will schedule Gelato to call the moveTicks function on a fixed frequency which can be adjusted so the position is going to be closely following along with the price at all times.
 
 ![](/src/images/blog/clm/calm-zone-graphic.png)
 

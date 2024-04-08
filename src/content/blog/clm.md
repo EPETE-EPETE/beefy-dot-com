@@ -36,9 +36,9 @@ How funny would it be if we just ended the blog here?
 
 We’ll tell you!  Beefy is taking a fresh look at the ALM process, coding from the ground up a novel solution to all of the above problems.  Instead of trying to decentralize the rebalancing process, how about we just skip rebalancing altogether?  At the same time you want all capital to be working and available for trades, since CL is all about capital efficiency afterall.
 
-To achieve this, CLM products will
-    * Put as many tokens as possible into a 50/50 position with the predetermined width for the strategy centered on the current price. We’ll call this the main position.
-    * With whichever token there is more of, create another position as a 1-sided limit order just 1 tick outside of the current tick. We’ll call this the alt position.
+To achieve this, CLM products will  
+* Put as many tokens as possible into a 50/50 position with the predetermined width for the strategy centered on the current price. We’ll call this the main position.
+* With whichever token there is more of, create another position as a 1-sided limit order just 1 tick outside of the current tick. We’ll call this the alt position.
 
 ![](/src/images/blog/clm/range-graphic.png)
 

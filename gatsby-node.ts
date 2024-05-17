@@ -15,6 +15,7 @@ const BLOG_ARTICLES_PER_PAGE = 12;
 async function createBlogPages({ graphql, actions }: BuildArgs) {
   const listTemplate = path.resolve('src/templates/blog/list.tsx');
   const articleTemplate = path.resolve('src/templates/blog/article.tsx');
+  const tagTemplate = path.resolve('src/templates/blog/tag.tsx'); // Add path to tag template
 
   const result = await graphql<BlogArticlesQueryReturnType>(`
     query {
@@ -25,7 +26,15 @@ async function createBlogPages({ graphql, actions }: BuildArgs) {
             fields {
               slug
             }
+            frontmatter {
+              tags
+            }
           }
+        }
+      }
+      tagsGroup: allMarkdownRemark(limit: 2000) {
+        group(field: frontmatter___tags) {
+          fieldValue
         }
       }
     }
@@ -60,6 +69,26 @@ async function createBlogPages({ graphql, actions }: BuildArgs) {
         id: edge.node.id,
       },
     });
+  });
+
+  // Tag pages
+  result.data.tagsGroup.group.forEach(tag => {
+    const numTagPages = Math.ceil(
+      edges.filter(edge => edge.node.frontmatter.tags.includes(tag.fieldValue)).length / BLOG_ARTICLES_PER_PAGE
+    );
+    for (let i = 0; i < numTagPages; ++i) {
+      actions.createPage({
+        path: i === 0 ? `articles/tag/${tag.fieldValue}` : `articles/tag/${tag.fieldValue}/page/${i + 1}`,
+        component: tagTemplate,
+        context: {
+          tag: tag.fieldValue,
+          limit: BLOG_ARTICLES_PER_PAGE,
+          skip: i * BLOG_ARTICLES_PER_PAGE,
+          numPages: numTagPages,
+          currentPage: i + 1,
+        },
+      });
+    }
   });
 }
 

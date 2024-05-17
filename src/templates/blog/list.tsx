@@ -17,6 +17,7 @@ type TemplateProps = {
     skip: number;
     numPages: number;
     currentPage: number;
+    tag?: string;
   };
 };
 

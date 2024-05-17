@@ -6,6 +6,7 @@ sub_header: Autocompounding Overnight with USD+ on Beefy
 short_description: Introducing Overnight Finance’s innovative stablecoin solution,
   perfecting the art of price stability and inflation resistance in a single token.
 
+tags: [financial]
 ---
 ![](/src/images/blog/usd_cover.png)
 

@@ -1,5 +1,5 @@
-import React from "react";
-import { graphql } from "gatsby";
+import React from 'react';
+import { graphql } from 'gatsby';
 import { Meta } from '../../components/Common/Meta';
 import { ArticleGrid } from '../../components/Blog/ArticleGrid';
 import { Inner } from '../../components/Common/Inner';
@@ -31,14 +31,15 @@ const Pagination = styled(ArticlePagination)`
 
 const TagTemplate: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
   const articles = data.allMarkdownRemark.edges.map(edge => edge.node);
+  const { tag, currentPage, numPages } = pageContext;
 
   return (
     <>
-      <Meta title={`Posts tagged with "${pageContext.tag}"`} description={`Articles tagged with "${pageContext.tag}"`} />
+      <Meta title={`Posts tagged with "${tag}"`} description={`Articles tagged with "${tag}"`} />
       <Outer>
         <Inner>
           <ArticleGrid articles={articles} />
-          <Pagination currentPage={pageContext.currentPage} numPages={pageContext.numPages} />
+          <Pagination currentPage={currentPage} numPages={numPages} tag={tag} />
         </Inner>
       </Outer>
     </>
@@ -46,7 +47,7 @@ const TagTemplate: React.FC<TagTemplateProps> = ({ data, pageContext }) => {
 };
 
 export const pageQuery = graphql`
-  query($skip: Int!, $limit: Int!, $tag: String) {
+  query ($skip: Int!, $limit: Int!, $tag: String) {
     allMarkdownRemark(
       filter: { frontmatter: { tags: { in: [$tag] }, draft: { ne: true } } }
       sort: { fields: [frontmatter___date], order: DESC }

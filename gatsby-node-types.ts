@@ -9,7 +9,15 @@ export type BlogArticlesQueryReturnType = {
         fields: {
           slug: string;
         };
+        frontmatter: {
+          tags?: string[];
+        };
       };
+    }[];
+  };
+  tagsGroup: {
+    group: {
+      fieldValue: string;
     }[];
   };
 };

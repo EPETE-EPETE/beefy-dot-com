@@ -15,7 +15,7 @@ const BLOG_ARTICLES_PER_PAGE = 12;
 async function createBlogPages({ graphql, actions }: BuildArgs) {
   const listTemplate = path.resolve('src/templates/blog/list.tsx');
   const articleTemplate = path.resolve('src/templates/blog/article.tsx');
-  const tagTemplate = path.resolve('src/templates/blog/tag.tsx'); // Add path to tag template
+  const tagTemplate = path.resolve('src/templates/blog/tag.tsx');
 
   const result = await graphql<BlogArticlesQueryReturnType>(`
     query {
@@ -73,12 +73,16 @@ async function createBlogPages({ graphql, actions }: BuildArgs) {
 
   // Tag pages
   result.data.tagsGroup.group.forEach(tag => {
-    const numTagPages = Math.ceil(
-      edges.filter(edge => edge.node.frontmatter.tags.includes(tag.fieldValue)).length / BLOG_ARTICLES_PER_PAGE
+    const filteredEdges = edges.filter(
+      edge => edge.node.frontmatter.tags && edge.node.frontmatter.tags.includes(tag.fieldValue)
     );
+    const numTagPages = Math.ceil(filteredEdges.length / BLOG_ARTICLES_PER_PAGE);
     for (let i = 0; i < numTagPages; ++i) {
       actions.createPage({
-        path: i === 0 ? `articles/tag/${tag.fieldValue}` : `articles/tag/${tag.fieldValue}/page/${i + 1}`,
+        path:
+          i === 0
+            ? `articles/tag/${tag.fieldValue}`
+            : `articles/tag/${tag.fieldValue}/page/${i + 1}`,
         component: tagTemplate,
         context: {
           tag: tag.fieldValue,

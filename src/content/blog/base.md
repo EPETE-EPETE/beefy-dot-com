@@ -4,7 +4,6 @@ header_image: "/src/images/blog/base/cover.png"
 short_description: "Beefy deploys on chain #22 - Base - ready to bring the heat this August."
 sub_header: "It’s Onchain Summer with Beefy on Base!"
 title: "It’s Onchain Summer with Beefy on Base!"
-tags: [financial]
 ---
 ![](/src/images/blog/base/cover.png)
 

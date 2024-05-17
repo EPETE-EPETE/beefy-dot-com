@@ -5,7 +5,6 @@ header_image: "/src/images/blog/kava_deploy.png"
 sub_header: Beefy now supports the Kava network
 short_description: Can you name 17 blockchains? Beefy can.
 
-tags: [financial]
 ---
 ![](/src/images/blog/kava_deploy.png)
 

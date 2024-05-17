@@ -4,6 +4,7 @@ header_image: "/src/images/blog/quarterly-report-q2-2023/cover.png"
 short_description: "Dive back into Beefy's financial performance in the second quarter of 2023 with our latest quarterly report."
 sub_header: "Quarterly Report Q2 2023"
 title: "Quarterly Report Q2 2023"
+tags: [financial]
 
 ---
 ![](/src/images/blog/quarterly-report-q2-2023/cover.png)

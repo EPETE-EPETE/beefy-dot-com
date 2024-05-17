@@ -5,6 +5,7 @@ header_image: "/src/images/blog/report-cover.png"
 sub_header: Quarterly Report Q1 2023
 short_description: Catch up with how Beefy has performed in the first quarter of 2023
   with our inaugural quarterly financial report.
+tags: [financial]
 
 ---
 ![](/src/images/blog/report-cover.png)

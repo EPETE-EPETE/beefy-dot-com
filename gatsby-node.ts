@@ -79,7 +79,10 @@ async function createBlogPages({ graphql, actions }: BuildArgs) {
     const numTagPages = Math.ceil(filteredEdges.length / BLOG_ARTICLES_PER_PAGE);
     for (let i = 0; i < numTagPages; ++i) {
       actions.createPage({
-        path: i === 0 ? `articles/${tag.fieldValue}` : `articles/${tag.fieldValue}/page/${i + 1}`,
+        path:
+          i === 0
+            ? `articles/tag/${tag.fieldValue}`
+            : `articles/tag/${tag.fieldValue}/page/${i + 1}`,
         component: tagTemplate,
         context: {
           tag: tag.fieldValue,

@@ -36,11 +36,14 @@ const NextLink = styled(PageLink)`
 export type ArticlePaginationProps = {
   currentPage: number;
   numPages: number;
+  tag?: string;
   className?: string;
 };
+
 export const ArticlePagination = memo<ArticlePaginationProps>(function ArticlePagination({
   currentPage,
   numPages,
+  tag,
   className,
 }) {
   const hasPrevious = currentPage > 1;
@@ -50,15 +53,19 @@ export const ArticlePagination = memo<ArticlePaginationProps>(function ArticlePa
     return null;
   }
 
+  const basePath = tag ? `/articles/tag/${tag}` : '/articles';
+  const prevPage = currentPage > 2 ? `${basePath}/page/${currentPage - 1}/` : `${basePath}/`;
+  const nextPage = `${basePath}/page/${currentPage + 1}/`;
+
   return (
     <Pages className={className}>
       {hasPrevious ? (
-        <PrevLink to={`/articles/${currentPage > 2 ? `page/${currentPage - 1}/` : ''}`} rel="prev">
+        <PrevLink to={prevPage} rel="prev">
           Previous
         </PrevLink>
       ) : null}
       {hasNext ? (
-        <NextLink to={`/articles/page/${currentPage + 1}/`} rel="next">
+        <NextLink to={nextPage} rel="next">
           Next
         </NextLink>
       ) : null}

@@ -54,8 +54,8 @@ export const ArticlePagination = memo<ArticlePaginationProps>(function ArticlePa
   }
 
   const basePath = tag ? `/articles/tag/${tag}` : '/articles';
-  const prevPage = currentPage > 2 ? `${basePath}/page/${currentPage - 1}/` : `${basePath}/`;
-  const nextPage = `${basePath}/page/${currentPage + 1}/`;
+  const prevPage = currentPage > 2 ? `${basePath}/page/${currentPage - 1}` : `${basePath}`;
+  const nextPage = `${basePath}/page/${currentPage + 1}`;
 
   return (
     <Pages className={className}>

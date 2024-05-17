@@ -71,7 +71,7 @@ async function createBlogPages({ graphql, actions }: BuildArgs) {
     });
   });
 
-  // Tag pages
+  // Tag pages with pagination
   result.data.tagsGroup.group.forEach(tag => {
     const filteredEdges = edges.filter(
       edge => edge.node.frontmatter.tags && edge.node.frontmatter.tags.includes(tag.fieldValue)
